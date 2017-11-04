@@ -71,12 +71,10 @@
                 var parentRowId = "row" + i;
                 var currentRow = document.getElementById(parentRowId);
                 while (cols > currentRow.childElementCount) {
-                    console.log("Randul " + i + " are " + (currentRow.childElementCount) + " children");
                     var currentColIndex = currentRow.childElementCount;
                     var celula = document.createElement("textarea");
                     celula.name = "r" + i + "c" + currentColIndex;
                     celula.placeholder = "R " + i + " - C " + currentColIndex;
-                    console.log("R " + i + " - C " + currentColIndex);
                     currentRow.appendChild(celula);
                 }
             }
@@ -102,8 +100,6 @@ function getTableConversion()
     for ($r = 0; $r < $rows; $r++) {
         // adaugare randuri
         $randulCurent = "[row]";
-
-        echo ("Randul $r") . "<br>";
 
         // adugare coloane
         for ($c = 0; $c < $cols; $c++) {
