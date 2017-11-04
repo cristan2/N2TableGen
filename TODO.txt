@@ -1,0 +1,4 @@
+* remove boxes
+* adauga caseta pentru latime celule
+  * marime egala pentru toate
+  * marime individuala pentru fiecare coloana
