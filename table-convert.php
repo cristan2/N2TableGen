@@ -31,7 +31,7 @@
                        min = "1" max = "30"
                        onchange="creazaTabelOnScreen()">
             </p>
-            <label><input type="checkbox" name="center" value="true" checked>Centrează conţinut</label>
+            <label><input type="checkbox" name="center" value="true" checked>Centrează conţinut în celule</label>
             <p id = "tabelOnScreen"><label>Completează aici conţinutul:<br></label></p>
             <input type = "hidden" name = "convert_result">
             <p><input id = "button-submit" type = "submit" value = "Conversie in phpBB"></p>
@@ -49,14 +49,7 @@
             var rows   = document.getElementById("rows").value;
             var cols   = document.getElementById("cols").value;
 
-            // TODO remove randuri coloane
-//            if (cols < boxContainer.childElementCount-1) {
-//                while (boxContainer.childElementCount-1 > currNoPart) {
-//                    boxContainer.removeChild(boxContainer.lastChild);
-//                }
-//
-//            // add boxes
-//            }
+            /* --- randuri --- */
 
             // adauga randuri noi
             while (rows > rowsContainer.childElementCount-1) {
@@ -66,10 +59,18 @@
                 document.getElementById("tabelOnScreen").appendChild(row);
             }
 
-            // adauga coloane noi
+            // sterge randuri
+            while (rows < rowsContainer.childElementCount-1) {
+                document.getElementById("tabelOnScreen").removeChild(rowsContainer.lastChild);
+            }
+
+            /* --- coloane --- */
+
             for (i = 0; i <= rows; i++) {
                 var parentRowId = "row" + i;
                 var currentRow = document.getElementById(parentRowId);
+
+                // adauga coloane noi
                 while (cols > currentRow.childElementCount) {
                     var currentColIndex = currentRow.childElementCount;
                     var celula = document.createElement("textarea");
@@ -77,6 +78,12 @@
                     celula.placeholder = "R " + i + " - C " + currentColIndex;
                     currentRow.appendChild(celula);
                 }
+
+                // sterge coloane
+                while (cols < currentRow.childElementCount) {
+                    currentRow.removeChild(currentRow.lastChild);
+                }
+
             }
         }
     </script>
@@ -89,6 +96,8 @@ function getTableConversion()
     $cols   = $_POST['cols'];
     $titlu  = isset($_POST['titlu_tabel']) ? $_POST['titlu_tabel'] : "";
     $center = isset($_POST['center']);
+
+    echo ("rows = $rows, cols = $cols");
 
     if ($titlu) {
         $titlu = "<h2>[size=150][b]".$titlu."[/b][/size]</h2><br>";

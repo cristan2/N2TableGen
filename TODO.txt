@@ -1,4 +1,5 @@
-* remove boxes
 * adauga caseta pentru latime celule
-  * marime egala pentru toate
+  * marime egala pentru toate, sau
   * marime individuala pentru fiecare coloana
+
+* poate niste css
